@@ -1,0 +1,12 @@
+**/build
+**/install
+**/log
+**/build_isolated
+**/install_isolated
+**/devel_isolated
+core
+
+__pycache__
+.venv
+.vscode
+.DS_Store

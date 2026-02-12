@@ -1,0 +1,5 @@
+repositories:
+  dvl_msgs:
+    type: git
+    url: https://github.com/paagutie/dvl_msgs.git
+    version: master

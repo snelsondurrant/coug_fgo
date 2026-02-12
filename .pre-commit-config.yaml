@@ -1,0 +1,27 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: ['--maxkb=10000']
+
+  - repo: https://github.com/psf/black
+    rev: 26.1.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/snelsondurrant/coug-hooks
+    rev: 38b761a58f17a436b0e00792eb33485e51e43e61
+    hooks:
+      - id: ament_uncrustify
+      - id: ament_cpplint
+      # - id: ament_cppcheck
+      - id: ament_flake8
+      - id: ament_pep257
+      - id: ament_lint_cmake
+      - id: ament_xmllint
+      - id: ament_copyright
