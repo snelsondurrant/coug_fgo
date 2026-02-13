@@ -28,7 +28,16 @@ def generate_launch_description():
     set_origin = LaunchConfiguration("set_origin")
 
     pkg_share = get_package_share_directory("coug_fgo")
-    params_file = os.path.join(pkg_share, "config", "coug_fgo_params.yaml")
+    fleet_params = os.path.join(
+        os.path.expanduser("~"), "config", "fleet", "coug_fgo_params.yaml"
+    )
+    auv_params = PythonExpression(
+        [
+            "os.path.join(os.path.expanduser('~'), 'config', '",
+            auv_ns,
+            "' + '_params.yaml')",
+        ]
+    )
 
     odom_frame = PythonExpression(
         ["'", auv_ns, "/odom' if '", auv_ns, "' != '' else 'odom'"]
@@ -131,7 +140,8 @@ def generate_launch_description():
                 executable="factor_graph",
                 name="factor_graph_node",
                 parameters=[
-                    params_file,
+                    fleet_params,
+                    auv_params,
                     {
                         "use_sim_time": use_sim_time,
                         "map_frame": "map",
@@ -154,7 +164,8 @@ def generate_launch_description():
                 name="factor_graph_node_tm",
                 condition=IfCondition(LaunchConfiguration("compare")),
                 parameters=[
-                    params_file,
+                    fleet_params,
+                    auv_params,
                     {
                         "use_sim_time": use_sim_time,
                         "map_frame": "map",
@@ -180,7 +191,8 @@ def generate_launch_description():
                 executable="origin_manager",
                 name="origin_manager_node",
                 parameters=[
-                    params_file,
+                    fleet_params,
+                    auv_params,
                     {
                         "use_sim_time": use_sim_time,
                         "map_frame": "map",
@@ -194,7 +206,8 @@ def generate_launch_description():
                 executable="dvl_a50_twist",
                 name="dvl_a50_twist_node",
                 parameters=[
-                    params_file,
+                    fleet_params,
+                    auv_params,
                     {
                         "use_sim_time": use_sim_time,
                         "parameter_frame": dvl_link_frame,
