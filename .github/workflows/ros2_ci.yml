@@ -45,6 +45,7 @@ jobs:
           UPSTREAM_WORKSPACE: dependencies.repos
           TARGET_WORKSPACE: .
           CCACHE_DIR: ${{ github.workspace }}/.ccache
+          BEFORE_SCRIPT: 'printenv | grep CI'
           AFTER_SETUP_UPSTREAM_WORKSPACE: |
             git config --global --add safe.directory "*"
             vcs custom --git --args submodule update --init --recursive
