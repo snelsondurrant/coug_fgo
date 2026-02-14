@@ -28,8 +28,8 @@ jobs:
         runner: [ubuntu-latest, ubuntu-24.04-arm]
     runs-on: ${{ matrix.runner }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/cache@v5
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/.ccache
           key: ccache-${{ matrix.runner }}-${{ github.run_id }}
@@ -42,7 +42,6 @@ jobs:
         env:
           DOCKER_IMAGE: snelsondurrant/cougars:latest
           DOCKER_PULL: true
-          CI: true
           UPSTREAM_WORKSPACE: dependencies.repos
           TARGET_WORKSPACE: .
           CCACHE_DIR: ${{ github.workspace }}/.ccache
